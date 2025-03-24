@@ -7,55 +7,77 @@ import application.model.IphoneMainMenu;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in).useLocale(Locale.US)) {
+            System.out.println("------------Tela inicial------------");
+            System.out.println("BLOQUEADO");
+            System.out.println("DESBLOQUEI PRECIONANDO 'S'");
 
-		try (Scanner sc = new Scanner(System.in).useLocale(Locale.US)) {
-			System.out.println("------------Tela inicial------------");
-			System.out.println("BLOQUEADO");
-			System.out.println("DESBLOQUEI PRECIONANDO 'S'");
+            char start = sc.next().charAt(0);
 
-			char start = sc.next().charAt(0);
+            if (start != 'S') {
+                System.out.println("Opção inválida! Encerrando o programa...");
+                return;
+            }
 
-			switch (start) {
-			case 'S': {
+            for (int i = 0; i < 50; i++) {
+                System.out.print("|");
+                System.out.print("||");
+            }
+            System.out.println("\nDesbloqueado!\n");
 
-				for (int i = 0; i < 50; i++) {
-					System.out.print(">");
-					System.out.print("<");
-					
+            IphoneMainMenu iphone = new IphoneMainMenu();
 
-				}
-				System.out.println("");
+            while (true) {
+                System.out.println("------------MENU PRINCIPAL------------");
+                System.out.println("1 - Reprodutor Musical");
+                System.out.println("2 - Aparelho Telefônico");
+                System.out.println("3 - Navegador na Internet");
+                System.out.println("4 - Sair");
+                System.out.print("Escolha uma opção: ");
 
-				IphoneMainMenu iphone = new IphoneMainMenu();
+                int option = sc.nextInt();
 
-				// Testando funcionalidades do Reprodutor Musical
-				iphone.selectMusic("Brega funk");
-				iphone.play();
-				iphone.pause();
+                switch (option) {
+                    case 1:
+                        System.out.println("Reprodutor Musical:");
+                        iphone.selectMusic("Brega funk");
+                        iphone.play();
+                        iphone.pause();
+                        iphone.close();
+                        break;
 
-				// Testando funcionalidades do Aparelho Telefônico
-				iphone.turnOn();
-				iphone.answer();
-				iphone.call();
-				iphone.startVoiceMail();
-				iphone.turnOff();
+                    case 2:
+                        System.out.println("Aparelho Telefônico:");
+                        iphone.turnOn();
+                        iphone.answer();
+                        iphone.call();
+                        iphone.startVoiceMail();
+                        iphone.turnOff();
+                        break;
 
-				// Testando funcionalidades do Navegador na Internet
-				iphone.displayPage("https://www.google.com");
-				iphone.search();
-				iphone.addNewTab();
-				iphone.updatePage();
+                    case 3:
+                        System.out.println("Navegador na Internet:");
+                        iphone.displayPage("https://www.google.com");
+                        iphone.search();
+                        iphone.addNewTab();
+                        iphone.updatePage();
+                        break;
 
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + start);
+                    case 4:
+                       
+                        System.out.println("Encerrando o programa...");
+                        return;
 
-			}
-			
-		}
+                    default:
+                        System.out.println("Opção inválida! Tente novamente.");
+                        break;
+                }
 
-	}
-
-
+                System.out.println("\nPressione Enter para continuar...");
+                sc.nextLine(); 
+                sc.nextLine(); 
+            }
+        }
+    }
 }
