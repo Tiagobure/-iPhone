@@ -1,11 +1,15 @@
 package application.model;
 
-interface TelephoneDevice {
+public interface TelephoneDevice {
 
 	void call();
 
 	void turnOn();
 
 	void turnOff();
+
+	void answer();
+
+	void startVoiceMail();
 
 }
